@@ -30,4 +30,4 @@ app.post('/riot', function(request, response) {
 
 });
 
-var server = app.listen(8080);
+var port_number = server.listen(process.env.PORT || 3000);
