@@ -20,7 +20,6 @@ app.listen(app.get('port'), function() {
 });
 
 
-/*
 app.post('/riot', function(request, response) {
 
   var name = request.body.summonerName;
@@ -44,5 +43,4 @@ app.post('/riot', function(request, response) {
 	});
 
 });
-*/
 
