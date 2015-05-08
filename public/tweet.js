@@ -2,7 +2,9 @@
 
 $('#btn').click(function() {
       var SUMMONER_NAME = "";
-      SUMMONER_NAME = $("#userName").val();
+      SUMMONER_NAME = $("#userName").val().replace(/ /g, "").toLowerCase();
+
+
 
 
 
@@ -21,10 +23,14 @@ $('#btn').click(function() {
 
                   var summonerLevel = data[SUMMONER_NAME].summonerLevel;
 
-                  document.getElementById("sLevel").innerHTML = summonerLevel;
+                  $("#sLevel").css("color", "black"); 
+                  $("#sLevel").html(summonerLevel);
                 },
               error: function (XMLHttpRequest, textStatus, errorThrown) {
-                  alert("error getting Summoner data!");
+
+                  $("#sLevel").html("summoner name not found");
+                  $("#sLevel").css("color", "red"); 
+
               }
           });
       } else {}
