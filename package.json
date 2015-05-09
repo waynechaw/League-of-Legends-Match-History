@@ -6,6 +6,7 @@
   "author": "Brian Holt <bri@nho.lt>",
   "license": "MIT",
   "dependencies": {
+  	"pg": "4.x",
     "express": "~4.6.0",
     "body-parser": "~1.4.3"
   }
