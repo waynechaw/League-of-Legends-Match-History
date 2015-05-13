@@ -1,13 +1,13 @@
 {
-  "name": "intro-to-webdev-app",
+  "name": "riot api",
   "version": "0.0.0",
-  "description": "Intro to Web Dev app for Frontend Masters",
+  "description": "practice app for using riot api",
   "main": "app.js",
-  "author": "Brian Holt <bri@nho.lt>",
-  "license": "MIT",
+  "author": "wayne",
   "dependencies": {
   	"pg": "4.x",
     "express": "~4.6.0",
-    "body-parser": "~1.4.3"
+    "body-parser": "~1.4.3",
+    "serve-favicon": "2.2.0"
   }
 }
