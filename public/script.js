@@ -43,7 +43,7 @@ $('#btn').click(function() {
 });
 
 var convertResult = function(str){
-  alert(str);
+
   if (str == false){
     return "loss"
   }else{
