@@ -51,37 +51,7 @@ var convertResult = function(str){
   }
 }
 
-var prependMatch = function(champName, result, role, lane) {
-  var newMatch = '<span class="bold">Champion:</span> ' + champName +  ' | <span class="bold">Result: </span>' + convertResult(result) + ' | <span class="bold">Role:</span> ' + role.toLowerCase() + ' | <span class="bold">Lane: </span>' + lane.toLowerCase() + '<br><hr>';
 
-  $('.historyContainer').prepend(newMatch);
-}
-
-var addMatch = function(champName, result, role, lane){
-  //alert(champName + " " + result + " " + role + " " + lane);
-
-  var data = {};
-  data.champID = champName;
-
-
-
-  $.ajax({
-    url: '/champ',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(data),
-    success: function(data) {
-
-      var champName = data.name;
-      
-      prependMatch(champName, result, role, lane)
-
-    }
-
-  });
-
-
-}
 
 
 
@@ -97,10 +67,23 @@ var matchHistory = function(summonerID){
     data: JSON.stringify(data),
     success: function(data) {
 
-      
+
+      var matchArray = [];
+
       data.matches.forEach(function(match){
-        addMatch(match.participants[0].championId, match.participants[0].stats.winner, match.participants[0].timeline.role, match.participants[0].timeline.lane);
+        matchArray.push(
+        {
+          champ: match.participants[0].championId,
+          result: match.participants[0].stats.winner,
+          role: match.participants[0].timeline.role,
+          lane: match.participants[0].timeline.lane,
+          time: match.matchCreation
+        })
       });
+
+      transformTime(matchArray);
+
+
 
       
 
@@ -110,3 +93,63 @@ var matchHistory = function(summonerID){
   });
 }
 
+var transformTime = function(arr){
+   
+
+
+
+    $.ajax({
+    url: '/map',
+    type: 'POST',
+    contentType: 'application/json',
+    success: function(data) {
+
+      //console.log (data);
+      //console.log (arr);
+
+
+      arr.forEach(function(match){
+        match.champ = data.data[match.champ].name;
+        match.time = match.time;
+      });
+
+
+
+      updateMatch(arr.sort(function(b, a){return a.time - b.time}));
+
+
+    }
+  });
+
+}
+
+var updateMatch = function(arr) {
+
+  console.log(arr);
+
+  arr.forEach(function(match){
+
+
+    var newMatch = 
+    {
+      html: '<span class="bold">Champion:</span> ' + match.champ +  ' | <span class="bold">Result: </span>' + convertResult(match.result) + ' | <span class="bold">Role:</span> ' + match.role.toLowerCase() + ' | <span class="bold">Lane: </span>' + match.lane.toLowerCase() + '<br><hr>',
+      time: match.time
+    }
+
+    $('.historyContainer').append(newMatch.html);
+
+
+
+  });
+
+  /*
+  var newMatch = 
+  {
+    html: '<span class="bold">Champion:</span> ' + champName +  ' | <span class="bold">Result: </span>' + convertResult(result) + ' | <span class="bold">Role:</span> ' + role.toLowerCase() + ' | <span class="bold">Lane: </span>' + lane.toLowerCase() + '<br><hr>',
+    time: time
+  }
+
+  $('.historyContainer').prepend(newMatch.html);
+
+  */
+}

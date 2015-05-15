@@ -63,11 +63,11 @@ app.post('/match', function(request, response) {
 });
 
 
-app.post('/champ', function(request, response) {
 
-  var champID = request.body.champID;
+app.post('/map', function(request, response) {
 
-  var url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/" + champID + "?api_key=3cfc7c5c-611d-4fc6-9154-7801d822e7cb"
+
+  var url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?dataById=true&api_key=3cfc7c5c-611d-4fc6-9154-7801d822e7cb"
 
 
 	var riotAPI = https.get(url, function(riotResponse){
