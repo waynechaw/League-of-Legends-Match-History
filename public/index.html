@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Riot pls</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Riot pls</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h3 class="leader-h">Simple Summoner Look Up</h1>
+    <div class="container">
+      <input id="userName" placeholder="Summoner Name"/>
+      <input type="submit" value="Submit" id="btn"/>
+      <br>
+      <br>Summoner Level: <span id="sLevel"></span>
+      <br>
+      <div id="matchHistory">
+      Match History:
+        <hr>
+        <div class="historyContainer">
 
-  <h1 class="leader-h">Get my summoner level please</h1>
-
-  <div class="tweet-container">
-
-  <input id="userName"/>
-  <input type="submit" id="btn"/>
-  <br/>
-  <br/>Summoner Level: <span id="sLevel"></span>
-
-  </div>
-
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="tweet.js"></script>
-</body>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
