@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  margin: 20px auto;
+  margin: 20px auto 5px;
   width: 700px;
   padding: 30px;
   border: 1px solid gray;
@@ -26,6 +26,14 @@ body {
   overflow: hidden;
   background-color: honeydew;
   font-size: 0.8em;
+}
+
+#legal{
+  width: 700px;
+  margin:  5px auto;
+  font-size: 0.7em;
+  color: gray;
+  padding: 0 10px;
 }
 
 #matchHistory{
