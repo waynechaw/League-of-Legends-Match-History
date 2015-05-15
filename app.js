@@ -45,7 +45,7 @@ app.post('/match', function(request, response) {
   var id = request.body.summonerID;
 
   var url = "https://na.api.pvp.net/api/lol/na/v2.2/matchhistory/" + id + "?api_key=3cfc7c5c-611d-4fc6-9154-7801d822e7cb"
-  console.log(url);	
+
 
 
 	var riotAPI = https.get(url, function(riotResponse){

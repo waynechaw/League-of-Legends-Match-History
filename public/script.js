@@ -43,7 +43,8 @@ $('#btn').click(function() {
 });
 
 var convertResult = function(str){
-  if (str == "FALSE"){
+  alert(str);
+  if (str == false){
     return "loss"
   }else{
     return "win"
