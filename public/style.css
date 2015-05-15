@@ -19,17 +19,18 @@ body {
 
 .container {
   margin: 20px auto;
-  width: 35%;
+  width: 600px;
   padding: 30px;
   border: 1px solid gray;
   border-radius: 5px;
   overflow: hidden;
-    background-color: honeydew;
+  background-color: honeydew;
 }
 
 #matchHistory{
   margin-top: 15px;
   height: 400px;
+
 
 }
 
