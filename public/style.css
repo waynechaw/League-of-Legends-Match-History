@@ -19,23 +19,24 @@ body {
 
 .container {
   margin: 20px auto;
-  width: 600px;
+  width: 700px;
   padding: 30px;
   border: 1px solid gray;
   border-radius: 5px;
   overflow: hidden;
   background-color: honeydew;
+  font-size: 0.8em;
 }
 
 #matchHistory{
   margin-top: 15px;
-  height: 400px;
+  height: 360px;
 
 
 }
 
 hr{
-  width: 400px;
+  width: 450px;
   margin-left:0;
 }
 
