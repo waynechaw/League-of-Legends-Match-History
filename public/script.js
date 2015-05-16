@@ -1,11 +1,43 @@
+
+var animateLoading = function(){
+  var load = setInterval(function () {
+
+    if ($('#status').html() == "Loading..."){
+      $('#status').html("Loading")
+    }else{
+      $('#status').append(".");
+    }
+
+
+
+    if ($('.historyContainer').html() != ""){
+      clearInterval(load);
+      $('#status').html("");
+    }
+
+
+
+
+ }, 400);
+}
+
+
+
+
 $('#btn').click(function() {
 
   $('.historyContainer').html("");
+
+
+
 
       var SUMMONER_NAME = "";
       SUMMONER_NAME = $("#userName").val().replace(/ /g, "").toLowerCase();
 
       if (SUMMONER_NAME !== "") {
+
+        $('#status').html("Loading");
+        animateLoading();
 
         var data = {};
         var summonerID;
@@ -132,7 +164,7 @@ var updateMatch = function(arr) {
 
     var newMatch = 
     {
-      html: '<span class="bold">Champion:</span> ' + match.champ +  ' | <span class="bold">Result: </span>' + convertResult(match.result) + ' | <span class="bold">Role:</span> ' + match.role.toLowerCase() + ' | <span class="bold">Lane: </span>' + match.lane.toLowerCase() + '<br><hr>',
+      html: '<span class="block"><span class="bold">Champion:</span> ' + match.champ +  '</span> | <span class="block2"><span class="bold">Result: </span>' + convertResult(match.result) + '</span> | <span class="block2"><span class="bold">Role:</span> ' + match.role.toLowerCase().replace("_", " ") + '</span> | <span class="bold">Lane: </span>' + match.lane.toLowerCase() + '<br><hr>',
       time: match.time
     }
 
@@ -142,14 +174,7 @@ var updateMatch = function(arr) {
 
   });
 
-  /*
-  var newMatch = 
-  {
-    html: '<span class="bold">Champion:</span> ' + champName +  ' | <span class="bold">Result: </span>' + convertResult(result) + ' | <span class="bold">Role:</span> ' + role.toLowerCase() + ' | <span class="bold">Lane: </span>' + lane.toLowerCase() + '<br><hr>',
-    time: time
-  }
 
-  $('.historyContainer').prepend(newMatch.html);
 
-  */
+
 }
