@@ -61,3 +61,7 @@ hr{
   display:inline-block;
   width: 100px;
 }
+
+#status{
+  color:#B3B3B3;
+}
