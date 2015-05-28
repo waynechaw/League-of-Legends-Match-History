@@ -6,7 +6,7 @@ var animateLoading = function(){
       $('#status').append(".");
     }
 
-    if ($('.historyContainer').html() != ""){
+    if (($('.historyContainer').html() != "")||($("#sLevel").html()=="summoner name not found")){
       clearInterval(load);
       $('#status').html("");
     }
@@ -87,18 +87,11 @@ var matchHistory = function(summonerID){
 
 var transformTime = function(arr){
    
-    $.ajax({
-    url: '/map',
-    type: 'POST',
-    contentType: 'application/json',
-    success: function(data) {
 
       arr.forEach(function(match){
-        match.champ = data.data[match.champ].name;
+        match.champ = staticChampData.data[match.champ].name;
       });
       updateMatch(arr);
-    }
-  });
 
 }
 
