@@ -73,26 +73,21 @@ var matchHistory = function(summonerID){
       data.matches.forEach(function(match){
         matchArray.push(
         {
-          champ: match.participants[0].championId,
+          champ: getChampName(match.participants[0].championId),
           result: match.participants[0].stats.winner,
           role: match.participants[0].timeline.role,
           lane: match.participants[0].timeline.lane,
           time: match.matchCreation
         })
       });
-      transformTime(matchArray);
+      updateMatch(matchArray);
     }
   });
 }
 
-var transformTime = function(arr){
-   
 
-      arr.forEach(function(match){
-        match.champ = staticChampData.data[match.champ].name;
-      });
-      updateMatch(arr);
-
+var getChampName = function(id){
+  return staticChampData.data[id].name;
 }
 
 var updateMatch = function(arr) {
