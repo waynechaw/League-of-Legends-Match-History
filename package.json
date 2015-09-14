@@ -1,13 +1,13 @@
 
 {
-  "name": "intro-to-webdev-app",
+  "name": "intro-to-webdev-appwayne",
   "version": "0.0.0",
   "engines": {
     "node": "0.12.2"
   },
-  "description": "Intro to Web Dev app for Frontend Masters",
+  "description": "match history",
   "main": "app.js",
-  "author": "Brian Holt <bri@nho.lt>",
+  "author": "wayne",
   "license": "MIT",
   "dependencies": {
     "pg": "4.x",
