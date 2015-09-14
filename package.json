@@ -1,6 +1,6 @@
 
 {
-  "name": "intro-to-webdev-appwayne",
+  "name": "simple-match-history",
   "version": "0.0.0",
   "engines": {
     "node": "0.12.2"
