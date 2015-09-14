@@ -73,17 +73,89 @@ var matchHistory = function(summonerID){
       data.matches.forEach(function(match){
         matchArray.push(
         {
-          champ: getChampName(match.participants[0].championId),
-          result: match.participants[0].stats.winner,
-          role: match.participants[0].timeline.role,
-          lane: match.participants[0].timeline.lane,
-          time: match.matchCreation
+          champ: getChampName(match.champion),
+          //result: matchResult(match.matchId, summonerID),
+          role: match.role,
+          lane: match.lane,
+          time: match.timestamp,
+          matchID: match.matchId
         })
       });
-      updateMatch(matchArray);
+      allMatchResult(matchArray, summonerID);
     }
   });
 }
+
+var allMatchResult = function(matchArray, summonerID){
+
+  $.when(matchResult(matchArray[0].matchID, summonerID), matchResult(matchArray[1].matchID, summonerID), matchResult(matchArray[2].matchID, summonerID), matchResult(matchArray[3].matchID, summonerID), matchResult(matchArray[4].matchID, summonerID), matchResult(matchArray[5].matchID, summonerID), matchResult(matchArray[6].matchID, summonerID), matchResult(matchArray[7].matchID, summonerID), matchResult(matchArray[8].matchID, summonerID), matchResult(matchArray[9].matchID, summonerID)).done(function(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10){
+
+
+    var matches = [].concat(r1[0]).concat(r2[0]).concat(r3[0]).concat(r4[0]).concat(r5[0]).concat(r6[0]).concat(r7[0]).concat(r8[0]).concat(r9[0]).concat(r10[0]);
+
+
+
+
+    matches.forEach(function(match, index){
+      var participantID;
+      var result;
+
+
+      match.participantIdentities.forEach(function(participant){
+        if (participant.player.summonerId == summonerID){
+          participantID = participant.participantId;
+        }
+      });
+
+      match.participants.forEach(function(participant){
+        if (participant.participantId == participantID){
+          result = participant.stats.winner;
+        }
+      });
+
+      //console.log(participantID, result);
+
+      match.result = result;
+      matchArray[index].result = result;
+
+    });
+
+    updateMatch (matchArray);
+
+
+
+
+  });
+
+
+}
+
+var matchResult = function(matchID, summonerID){
+
+  var data = {};
+  data.matchID = matchID;
+
+  return $.ajax({
+    url: '/result/' + matchID,
+    type: 'GET',
+    contentType: 'application/json',
+    success: function(data) {
+
+
+      var participant;
+
+      data.participantIdentities.forEach(function(participant){
+        if (participant.player.summonerId == summonerID){
+          participant = participant.participantID;
+        }
+      });
+
+      return participant;
+
+    }
+  });
+}
+
 
 
 var getChampName = function(id){
@@ -94,7 +166,7 @@ var updateMatch = function(arr) {
 
   arr.forEach(function(match){
     var newMatch = '<span class="block"><span class="bold">Champion:</span> ' + match.champ +  '</span> | <span class="block2"><span class="bold">Result: </span>' + convertResult(match.result) + '</span> | <span class="block2"><span class="bold">Role:</span> ' + match.role.toLowerCase().replace("_", " ") + '</span> | <span class="bold">Lane: </span>' + match.lane.toLowerCase() + '<br><hr>';
-    $('.historyContainer').prepend(newMatch);
+    $('.historyContainer').append(newMatch);
   });
 
 }

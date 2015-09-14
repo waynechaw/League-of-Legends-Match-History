@@ -36,13 +36,38 @@ app.post('/match', function(request, response) {
 
   var id = request.body.summonerID;
 
-  var url = "https://na.api.pvp.net/api/lol/na/v2.2/matchhistory/" + id + "?api_key=36ca80ba-ff5b-4fa4-bdfd-39b2d92f7d29"
+  var url = "https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/" + id + "?beginIndex=0&endIndex=10&api_key=36ca80ba-ff5b-4fa4-bdfd-39b2d92f7d29";
+
 
 	var riotAPI = https.get(url, function(riotResponse){
 		var body = "";
 		riotResponse.on('data', function(chunk){
 			body += chunk;
 		});
+		riotResponse.on('end', function(){
+			response.type('json');
+			response.end(body);		
+		});	
+	});
+
+});
+
+
+app.get('/result/:id', function(request, response) {
+
+
+	var matchID = request.params.id;
+
+  	var url = "https://na.api.pvp.net/api/lol/na/v2.2/match/" + matchID + "?api_key=00aba4b6-7d40-4dfd-b023-d0449210ff14";
+
+  	console.log(url);
+
+	var riotAPI = https.get(url, function(riotResponse){
+		var body = "";
+		riotResponse.on('data', function(chunk){
+			body += chunk;
+		});
+
 		riotResponse.on('end', function(){
 			response.type('json');
 			response.end(body);		
